@@ -49,11 +49,13 @@ function addMessageHandler(callback) {
             }
         } else if (msg.action === "get username") {
             username = msg.data[1];
-        }else if(msg.action === "rumble"){
-            toggleRumble();
-        }else if(msg.action == "set color"){
+        }else if(msg.action === "rumble on"){
+            rumbleOn();
+        }else if(msg.action === "rumble off"){
+            rumbleOff();
+        }else if(msg.action === "set color"){
             setBackgroundColor(msg.data);
-        }else if(msg.action == "set carModel"){
+        }else if(msg.action === "set carModel"){
             setCarModel(msg.data);
         }
         else {
@@ -62,16 +64,19 @@ function addMessageHandler(callback) {
     }
 }
 
-function toggleRumble() {
-    
+function rumbleOn() {
+
     if(!rumble){
         window.navigator.vibrate(1000);
         rumble = true;
-
-    }else{
-        window.navigator.vibrate(0);
-        rumble = false;       
     }
+}
+
+function rumbleOff() {
+
+
+    window.navigator.vibrate(0);
+    rumble = false;
 }
 
 function sendToGame(action, data) {
@@ -113,12 +118,6 @@ function getId() {
 function setUsername(newUsername){
 
     username = newUsername;
-    try {
-    //writeUsername();
-	}
-	catch(err) {
-    console.log(err.message);
-	}
  
 }
 
