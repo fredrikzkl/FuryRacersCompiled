@@ -5,6 +5,7 @@ var style;
 var usernameText;
 var carModel;
 var carModelText;
+var onStart = true;
 
 function setBackgroundColor(color){
 
@@ -19,7 +20,11 @@ function setCarModel(carModel){
 
 function drawCarModel(){
 
-  carModelText.destroy();
+  if(!onStart){
+  	carModelText.destroy();
+  }else{
+  	onStart = false;
+  }
 
   carModelText = game.add.text(game.world.centerX, 0, carModel, style);
 
@@ -298,8 +303,6 @@ function drawUsername(){
       game.scale.refresh();
 
       style = { font: ' 20pt Ariel', fill: 'black', align: 'left', wordWrap: true, wordWrapWidth: 450 };
-      usernameText = game.add.text(game.world.width, game.world.height, getUsername(), style);
-      carModelText = game.add.text(game.world.centerX, game.world.centerY, carModel, style);
 
       createToolsButton();
       createThrottleButton();
@@ -308,7 +311,7 @@ function drawUsername(){
 
       setBackgroundColor(offWHITE);
 
-      drawUsername();
+      drawCarModel();
 
       setFullscreen();
     }
